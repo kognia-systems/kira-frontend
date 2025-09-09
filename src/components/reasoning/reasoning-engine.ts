@@ -20,12 +20,12 @@ export const REASONING_TEMPLATES: Record<string, Partial<ReasoningNode>> = {
     icon: "greeting",
   },
   agent_listening: {
-    label: "Escuchando Cliente",
+    label: "Análizando la solicitud",
     description: "Procesando entrada de audio...",
     icon: "listening",
   },
   agent_analyzing: {
-    label: "Razonamiento",
+    label: "Consultando información en CRM",
     description: "Analizando contexto y necesidades...",
     icon: "analyzing",
   },
