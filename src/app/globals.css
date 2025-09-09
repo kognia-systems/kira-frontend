@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-ai-surface: #0f172a;
+  --color-dark-blue: #111c2d;
+  --color-dark-background: #15263a;
+  --color-ai-primary: #22d3ee;
+  --color-ai-accent: #a78bfa;
+  --color-ai-success: #10b981;
+  --color-ai-muted: #94a3b8;
+  --color-ai-pink: pink;
+  --color-ai-cyan: cyan;
+  --color-dark: #121212;
+  --font-roboto: 'Roboto Condensed', sans-serif;
+  --font-bebas: 'Bebas Neue', sans-serif;
+}
+
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px; /* tamaño del glow */
+  height: 400px;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.25), transparent 60%);
+  filter: blur(80px);
+  transform: translate(-50%, -50%);
+  z-index: 50;
+}
+
