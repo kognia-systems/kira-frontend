@@ -212,7 +212,7 @@ export function ReasoningPanel({
 
       {/* Footer */}
       {hasNodes && (
-        <div className="border-t border-gray-100 p-3 bg-gray-50/50">
+        <div className="border-t border-gray-100/10 p-3">
           <p className="text-xs text-gray-500 text-center">
             Kira • Agente de Atención al Cliente
           </p>

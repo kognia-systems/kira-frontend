@@ -347,14 +347,16 @@ export default function InteractiveAvatarSDK() {
           {/* Área de contenido del panel derecho - CAMBIO AQUÍ: agregué min-h-0 */}
           <div className="flex-1 rounded-2xl flex min-h-0">
             <div className="flex flex-row w-full">
-              <div className="flex flex-col flex-1">
-                <div className="mb-2">
+              <div className="flex-1 flex flex-col min-h-0">
+                <div className="flex-shrink-0 mb-2">
                   <SatisfactionPanelV2
-                    isOpen={isSatisfactionOpen}
+                    isOpen={true}
                     onToggle={() => setIsSatisfactionOpen(!isSatisfactionOpen)}
                   />
                 </div>
-                <MessageHistory />
+                <div className="flex-1 min-h-0 overflow-hidden">
+                  <MessageHistory />
+                </div>
               </div>
               <div className="flex-1 ps-2">
                 <ReasoningPanel

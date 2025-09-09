@@ -11,7 +11,6 @@ import {
 } from "./context";
 import { useVoiceChat } from "./useVoiceChat";
 import { useMessageHistory } from "./useMessageHistory";
-import { useConversationState } from "./useConversationState";
 
 export const useStreamingAvatarSession = () => {
   const {
@@ -25,10 +24,12 @@ export const useStreamingAvatarSession = () => {
     setIsUserTalking,
     setIsAvatarTalking,
     setConnectionQuality,
+    handleUserTalkingMessage,
+    handleStreamingTalkingMessage,
+    handleEndMessage,
     clearMessages,
   } = useStreamingAvatarContext();
   const { stopVoiceChat } = useVoiceChat();
-  const { startListening, stopListening } = useConversationState();
 
   useMessageHistory();
 
@@ -55,9 +56,8 @@ export const useStreamingAvatarSession = () => {
   const stop = useCallback(async () => {
     avatarRef.current?.off(StreamingEvents.STREAM_READY, handleStream);
     avatarRef.current?.off(StreamingEvents.STREAM_DISCONNECTED, stop);
-    // clearMessages();
+    clearMessages();
     stopVoiceChat();
-    stopListening();
     setIsListening(false);
     setIsUserTalking(false);
     setIsAvatarTalking(false);
@@ -92,7 +92,7 @@ export const useStreamingAvatarSession = () => {
       if (!avatarRef.current) {
         throw new Error("Avatar is not initialized");
       }
-      startListening();
+
       setSessionState(StreamingAvatarSessionState.CONNECTING);
       avatarRef.current.on(StreamingEvents.STREAM_READY, handleStream);
       avatarRef.current.on(StreamingEvents.STREAM_DISCONNECTED, stop);
@@ -113,21 +113,19 @@ export const useStreamingAvatarSession = () => {
       avatarRef.current.on(StreamingEvents.AVATAR_STOP_TALKING, () => {
         setIsAvatarTalking(false);
       });
-      // Comentamos los manejadores de mensajes para evitar duplicación
-      // ya que solo queremos los mensajes del backend
-      // avatarRef.current.on(
-      //   StreamingEvents.USER_TALKING_MESSAGE,
-      //   handleUserTalkingMessage,
-      // );
-      // avatarRef.current.on(
-      //   StreamingEvents.AVATAR_TALKING_MESSAGE,
-      //   handleStreamingTalkingMessage,
-      // );
-      // avatarRef.current.on(StreamingEvents.USER_END_MESSAGE, handleEndMessage);
-      // avatarRef.current.on(
-      //   StreamingEvents.AVATAR_END_MESSAGE,
-      //   handleEndMessage,
-      // );
+      avatarRef.current.on(
+        StreamingEvents.USER_TALKING_MESSAGE,
+        handleUserTalkingMessage
+      );
+      avatarRef.current.on(
+        StreamingEvents.AVATAR_TALKING_MESSAGE,
+        handleStreamingTalkingMessage
+      );
+      avatarRef.current.on(StreamingEvents.USER_END_MESSAGE, handleEndMessage);
+      avatarRef.current.on(
+        StreamingEvents.AVATAR_END_MESSAGE,
+        handleEndMessage
+      );
 
       await avatarRef.current.createStartAvatar(config);
 
@@ -142,6 +140,9 @@ export const useStreamingAvatarSession = () => {
       sessionState,
       setConnectionQuality,
       setIsUserTalking,
+      handleUserTalkingMessage,
+      handleStreamingTalkingMessage,
+      handleEndMessage,
       setIsAvatarTalking,
     ]
   );

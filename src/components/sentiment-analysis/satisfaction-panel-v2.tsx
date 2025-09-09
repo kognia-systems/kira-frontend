@@ -2,9 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Activity,
   RefreshCw,
-  ChevronDown,
   AlertCircle,
   CheckCircle2,
   Minus,
@@ -24,10 +22,7 @@ export function SatisfactionPanelV2({
   const {
     isAnalyzing,
     result,
-    lastAnalyzedAt,
     error,
-    uiMessage,
-    isSessionActive,
     reanalyze,
     conversationLength,
     hasMessages,
@@ -134,24 +129,6 @@ export function SatisfactionPanelV2({
                 </div>
               </div>
 
-              {/* Insight */}
-              <AnimatePresence mode="wait">
-                {result?.insight && (
-                  <motion.div
-                    key={result.insight}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="bg-gray-50 p-4 rounded-lg"
-                  >
-                    <p className="text-sm text-white text-center font-medium">
-                      {result.insight}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
               {/* Error display */}
               <AnimatePresence>
                 {error && (
@@ -166,14 +143,6 @@ export function SatisfactionPanelV2({
                 )}
               </AnimatePresence>
 
-              {/* Timestamp */}
-              {lastAnalyzedAt && (
-                <div className="text-center">
-                  <p className="text-xs text-white">
-                    Último análisis: {lastAnalyzedAt.toLocaleTimeString()}
-                  </p>
-                </div>
-              )}
             </div>
           </motion.div>
         </AnimatePresence>

@@ -91,7 +91,7 @@ export const MessageHistory: React.FC = () => {
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.1 }}
                   >
-                    <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                    <p className="text-xs leading-relaxed whitespace-pre-wrap">
                       {message.content}
                     </p>
                   </motion.div>
@@ -103,7 +103,7 @@ export const MessageHistory: React.FC = () => {
         </div>
       </div>
 
-      {/* Text input - Solo se muestra cuando no hay mensajes */}
+      {/* Text input - Solo se muestra cuando no hay mensajes
       {messages.length > 0 && (
         <motion.div
           className="m-4 pt-4 border-t border-gray-100 flex-shrink-0"
@@ -113,7 +113,7 @@ export const MessageHistory: React.FC = () => {
         >
           <TextInput />
         </motion.div>
-      )}
+      )} */}
     </motion.div>
   );
 };

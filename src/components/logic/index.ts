@@ -9,3 +9,4 @@ export {
   MessageSender,
   useStreamingAvatarContext,
 } from "./context";
+export type { Message } from "./context";
