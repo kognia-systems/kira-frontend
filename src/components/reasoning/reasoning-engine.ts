@@ -55,7 +55,7 @@ export const REASONING_TEMPLATES: Record<string, Partial<ReasoningNode>> = {
     icon: "action",
   },
   agent_response: {
-    label: "Preparando Respuesta",
+    label: "Consultando información en CRM",
     description: "Formulando comunicación clara...",
     icon: "greeting",
   },
