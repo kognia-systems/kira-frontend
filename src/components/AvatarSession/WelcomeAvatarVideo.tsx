@@ -44,7 +44,7 @@ export const WelcomeAvatarVideo = forwardRef<HTMLVideoElement>(({}, ref) => {
     <>
       {/* Capa superior: Indicadores arriba */}
       <motion.div
-        className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black/50 to-transparent z-10"
+        className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black/50 to-transparent z-10 rounded-2xl"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
@@ -61,10 +61,27 @@ export const WelcomeAvatarVideo = forwardRef<HTMLVideoElement>(({}, ref) => {
             <span className="text-sm font-medium">{getConnectionText()}</span>
           </motion.div>
         )}
+        {connectionQuality !== ConnectionQuality.UNKNOWN && (
+          <motion.div
+            className="absolute top-4 right-4 px-3 py-2 shadow-sm z-10"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
+          >
+            <Image
+              src="/beyond/beyond-light.png"
+              alt="Kognia Systems Logo"
+              width={100}
+              height={100}
+              priority={true}
+              className="mx-auto w-auto mb-8"
+            />
+          </motion.div>
+        )}
       </motion.div>
       {/* Video + Loading state */}
       <motion.div
-        className="absolute inset-0 flex items-center justify-center text-gray-300 text-lg"
+        className="absolute inset-0 flex items-center justify-center text-gray-300 text-lg rounded-2xl"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
@@ -74,12 +91,7 @@ export const WelcomeAvatarVideo = forwardRef<HTMLVideoElement>(({}, ref) => {
           ref={ref}
           autoPlay
           playsInline
-          className="w-full h-full object-cover bg-black"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
+          className="aspect-video object-cover bg-black rounded-2xl"
         >
           <track kind="captions" />
         </video>
@@ -122,9 +134,10 @@ export const WelcomeAvatarVideo = forwardRef<HTMLVideoElement>(({}, ref) => {
                 <Image
                   src="/beyond/beyond-dark.png"
                   alt="Kognia Systems Logo"
-                  width={200}
-                  height={200}
-                  className="mx-auto mb-8"
+                  width={150}
+                  height={180}
+                  priority={true}
+                  className="mx-auto w-auto mb-8"
                 />
                 <h3 className="text-xl font-semibold text-white mb-2">
                   IA En Accion, de promesa a realidad

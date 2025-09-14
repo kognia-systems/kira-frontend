@@ -42,12 +42,12 @@ export function WelcomeVideoControls({ onStart, onStop }: VideoControlsProps) {
             <button
               onClick={onStart}
               disabled={isConnecting}
-              className="h-14 gap-2 px-4 bg-white/10 rounded-lg flex items-center justify-center text-white hover:bg-white/20 hover:scale-105 transition-all duration-200 shadow-lg"
+              className="h-14 gap-3 px-5 bg-white/10 rounded-lg flex items-center justify-center text-white hover:bg-white/20 hover:scale-105 transition-all duration-200 shadow-lg text-sm"
             >
               {isConnecting ? (
-                <LoaderCircle className="w-6 h-6 animate-spin" />
+                <LoaderCircle className="w-5 h-5 animate-spin" />
               ) : (
-                <Phone size={24} />
+                <Phone size={20} />
               )}
               Inicia la llamada
             </button>
@@ -58,14 +58,14 @@ export function WelcomeVideoControls({ onStart, onStop }: VideoControlsProps) {
             {/* Botón Hangup */}
             <button
               onClick={onStop}
-              className="w-14 h-14 bg-red-500/90 rounded-full flex items-center justify-center text-white hover:bg-red-500 hover:scale-105 transition-all duration-200 shadow-lg"
+              className="w-14 h-14 bg-red-500/90 rounded-xl flex items-center justify-center text-white hover:bg-red-500 hover:scale-105 transition-all duration-200 shadow-lg"
             >
-              <PhoneOff size={24} />
+              <PhoneOff size={20} />
             </button>
 
             {/* Botón Mute/Unmute */}
             <motion.div
-              className={`w-16 h-16 rounded-full flex items-center justify-center ${
+              className={`w-16 h-16 rounded-xl flex items-center justify-center ${
                 isUserTalking
                   ? "bg-green-300 text-green-600"
                   : isMuted
@@ -79,16 +79,16 @@ export function WelcomeVideoControls({ onStart, onStop }: VideoControlsProps) {
               }}
             >
               <button onClick={handleMute}>
-                {isMuted ? <MicOff size={24} /> : <Mic size={24} />}
+                {isMuted ? <MicOff size={20} /> : <Mic size={20} />}
               </button>
             </motion.div>
 
             {/* Botón Interrupt */}
             <button
-              className="w-14 h-14 bg-blue-500/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 hover:scale-105 transition-all duration-200 shadow-lg"
+              className="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center text-white hover:bg-white/30 hover:scale-105 transition-all duration-200 shadow-lg"
               onClick={interrupt}
             >
-              <Hand size={24} />
+              <Hand size={20} />
             </button>
           </div>
         )}

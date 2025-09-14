@@ -33,7 +33,6 @@ export default function RootLayout({
     >
       <body className="font-roboto font-r antialiased overflow-hidden">
         {children}
-        <Toaster></Toaster>
       </body>
     </html>
   );

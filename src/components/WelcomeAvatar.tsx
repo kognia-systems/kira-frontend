@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import {
   AvatarQuality,
@@ -15,7 +15,6 @@ import {
 import { useStreamingAvatarSession } from "./logic/useStreamingAvatarSession";
 import { useMemoizedFn, useUnmount } from "ahooks";
 import { useVoiceChat } from "./logic";
-import { VideoStreamControls } from "./AvatarSession/VideoStreamControls";
 import { useReasoningWithSDK } from "./reasoning/useReasoning";
 import { WelcomeAvatarVideo } from "./AvatarSession/WelcomeAvatarVideo";
 import { WelcomeVideoControls } from "./AvatarSession/WelcomeVideoControls";
@@ -23,6 +22,7 @@ import { WelcomeVideoControls } from "./AvatarSession/WelcomeVideoControls";
 const DEFAULT_CONFIG: StartAvatarRequest = {
   quality: AvatarQuality.High,
   avatarName: "25d5c763d44744aeacaca1efa3f3e084",
+  useSilencePrompt: true,
   knowledgeBase: `
 **Rol asignado:**
 Eres el **avatar digital con IA de Albert Ollé**, presidente de Corporación Valora. Tu misión es abrir el evento **“IA en Acción: De Promesa a Realidad”** con un diálogo innovador junto al propio Albert Ollé, transmitiendo visión estratégica, liderazgo, cercanía y humanidad.
@@ -146,15 +146,7 @@ export default function WelcomeAvatar() {
   // Sistema de razonamiento
   const reasoning = useReasoningWithSDK();
 
-  const [config, setConfig] = useState<StartAvatarRequest>(DEFAULT_CONFIG);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isAvatarFocused, setIsAvatarFocused] = useState(false);
-
   const mediaStream = useRef<HTMLVideoElement>(null);
-
-  const toggleAvatarFocus = () => {
-    setIsAvatarFocused(!isAvatarFocused);
-  };
 
   async function fetchAccessToken() {
     const HEYGEN_API_KEY = process.env.NEXT_PUBLIC_HEYGEN_API_KEY;
@@ -184,7 +176,6 @@ export default function WelcomeAvatar() {
 
   const startSessionV2 = useMemoizedFn(async (isVoiceChat: boolean) => {
     try {
-      setIsLoading(true);
       const newToken = await fetchAccessToken();
       const avatar = initAvatar(newToken);
 
@@ -236,28 +227,23 @@ export default function WelcomeAvatar() {
         }
       });
 
-      await startAvatar(config);
+      await startAvatar(DEFAULT_CONFIG);
 
       if (isVoiceChat) {
         await startVoiceChat();
       }
     } catch (error) {
       console.error("Error starting avatar session:", error);
-    } finally {
-      setIsLoading(false);
     }
   });
 
   const handleStopSession = useMemoizedFn(async () => {
     try {
-      setIsLoading(true);
       await stopAvatar();
       // Finalizar las sesiones cuando se para manualmente
       reasoning.endSession?.();
     } catch (error) {
       console.error("Error stopping avatar session:", error);
-    } finally {
-      setIsLoading(false);
     }
   });
 
@@ -285,19 +271,17 @@ export default function WelcomeAvatar() {
 
         <div className="white"></div>
 
-        {/* <div className="border"></div> */}
+        <div className="border"></div>
 
         <div className="main">
-          <div className="input">
-            <div className="bg-dark rounded-4xl p-2 w-full h-full aspect-video shadow-2xl shadow-white/5">
-              <div className="h-full bg-gradient-to-br from-gray-600 via-gray-700 to-gray-800 rounded-3xl overflow-hidden relative">
-                <WelcomeAvatarVideo ref={mediaStream} />
+          <div className="input absolute">
+            <div className="w-full h-full aspect-video overflow-hidden rounded-4xl absolute">
+              <WelcomeAvatarVideo ref={mediaStream} />
 
-                <WelcomeVideoControls
-                  onStart={() => startSessionV2(true)}
-                  onStop={handleStopSession}
-                />
-              </div>
+              <WelcomeVideoControls
+                onStart={() => startSessionV2(true)}
+                onStop={handleStopSession}
+              />
             </div>
           </div>
         </div>
