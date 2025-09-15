@@ -262,7 +262,7 @@ export default function WelcomeAvatar() {
 
   return (
     <>
-      <div className="bg-grid bg-dark"></div>
+      <div className="bg-grid bg-black"></div>
       <div className="poda h-screen">
         <div className="glow"></div>
         <div className="darkBorderBg"></div>
