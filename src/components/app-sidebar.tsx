@@ -59,9 +59,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar {...props}>
-        <SidebarHeader> Configuración </SidebarHeader>
-        <SidebarContent className="p-4">
-          <SidebarGroup />
+      <SidebarHeader> Configuración </SidebarHeader>
+      <SidebarContent className="p-4">
+        <SidebarGroup>
           <SidebarMenu>
             <SidebarMenuItem>
               <Form {...form}>
@@ -116,10 +116,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       <FormItem>
                         <FormLabel>Knowlegde Base</FormLabel>
                         <FormControl>
-                          <Textarea
-                            placeholder="Enter the prompt"
-                            {...field}
-                          />
+                          <Textarea placeholder="Enter the prompt" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -130,8 +127,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </Form>
             </SidebarMenuItem>
           </SidebarMenu>
-          <SidebarGroup />
-        </SidebarContent>
+        </SidebarGroup>
+      </SidebarContent>
     </Sidebar>
   );
 }

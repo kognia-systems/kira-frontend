@@ -24,14 +24,14 @@ export function WelcomeVideoControls({ onStart, onStop }: VideoControlsProps) {
   const isConnecting = sessionState === StreamingAvatarSessionState.CONNECTING;
 
   const handleMute = () => {
-    if(isListening) {
+    if (isListening) {
       muteInputAudio();
       stopListening();
     } else {
       unmuteInputAudio();
       startListening();
     }
-  } 
+  };
 
   return (
     <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10">
