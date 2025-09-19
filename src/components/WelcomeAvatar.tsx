@@ -124,7 +124,7 @@ const DEFAULT_CONFIG: StartAvatarRequest = {
   useSilencePrompt: true,
   knowledgeBase: avatarPrompt,
   voice: {
-    voiceId: "008e051615974ca4a98878d0af4f7205",
+    voiceId: "7ccfc15e4b24440487d079bd0d623b54",
     rate: 1,
     emotion: VoiceEmotion.EXCITED,
     model: ElevenLabsModel.eleven_flash_v2_5,
