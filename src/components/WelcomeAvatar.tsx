@@ -120,7 +120,7 @@ Tu misión es abrir el evento “IA en Acción: De Promesa a Realidad” en diá
 
 const DEFAULT_CONFIG: StartAvatarRequest = {
   quality: AvatarQuality.High,
-  avatarName: "25d5c763d44744aeacaca1efa3f3e084",
+  avatarName: "8da8982a0b264035ac2955e47dbebd01",
   useSilencePrompt: true,
   knowledgeBase: avatarPrompt,
   voice: {
