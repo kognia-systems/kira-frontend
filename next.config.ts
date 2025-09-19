@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   eslint: {
     // WARNING: Esto deshabilita ESLint durante builds
     // Solo usar temporalmente
